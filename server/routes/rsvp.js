@@ -36,8 +36,15 @@ router.delete('/:id', function (req, res, next) {
 });
 
 //Create a new RSVP -IMPLEMENT YOUR OWN FUNCTION
-router.post('/', function (req, res, next) {
-    res.send(`CREATE NEW RSVP ${req.body.rsvp_person} ${req.body.rsvp_going}`);
+router.post('/add', function (req, res, next) {
+    RSVPCollection.create({
+        rsvp_person: req.body.rsvp_person,
+        rsvp_going: req.body.rsvp_going
+    },(err,results)=>{
+        if(err) res.send(err);
+        else res.send(`CREATE NEW RSVP ${req.body.rsvp_person} ${req.body.rsvp_going}`);
+    })
+
 });
 
 module.exports = router;
